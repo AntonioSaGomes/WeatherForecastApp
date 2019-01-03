@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".WeatherFragment">
 
+
+    <TextView
+        android:id="@+id/weatherDay"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:text="Day 0"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
     <TextView
         android:id="@+id/weatherCityNameLabel"
         android:layout_width="wrap_content"
@@ -20,10 +41,10 @@
         android:text="Cidade"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <TextView
         android:id="@+id/weatherCityName"
@@ -42,7 +63,7 @@
         app:layout_constraintHorizontal_bias="0.573"
         app:layout_constraintStart_toStartOf="@+id/weatherCityNameLabel"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"/>
+        app:layout_constraintVertical_bias="0.2"/>
 
 
 
@@ -59,10 +80,10 @@
         android:text="Máxima:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15"/>
+        app:layout_constraintVertical_bias="0.25"/>
 
     <TextView
         android:id="@+id/weatherMaxTemp"
@@ -80,7 +101,7 @@
         app:layout_constraintHorizontal_bias="0.573"
         app:layout_constraintStart_toStartOf="@+id/weatherMaxTempLabel"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15"/>
+        app:layout_constraintVertical_bias="0.25"/>
     <TextView
         android:id="@+id/weatherMinTempLabel"
         android:layout_width="wrap_content"
@@ -94,10 +115,10 @@
         android:text="Minima:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintVertical_bias="0.3"/>
     <TextView
         android:id="@+id/weatherMinTemp"
         android:layout_width="wrap_content"
@@ -114,7 +135,7 @@
         app:layout_constraintHorizontal_bias="0.573"
         app:layout_constraintStart_toStartOf="@+id/weatherMinTempLabel"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintVertical_bias="0.3"/>
 
 
     <TextView
@@ -130,10 +151,10 @@
         android:text="Descrição:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"/>
+        app:layout_constraintVertical_bias="0.35"/>
 
     <TextView
         android:id="@+id/weatherDescription"
@@ -151,7 +172,7 @@
         app:layout_constraintHorizontal_bias="0.573"
         app:layout_constraintStart_toStartOf="@+id/weatherMinTempLabel"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"/>
+        app:layout_constraintVertical_bias="0.35"/>
 
 
     <ImageView
@@ -165,7 +186,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0.60"
         app:layout_constraintHorizontal_bias="0.5"
          />
 
@@ -178,8 +199,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:background="@drawable/ic_left_arrow"
-        app:layout_constraintVertical_bias="0.65"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintVertical_bias="0.80"
+        app:layout_constraintHorizontal_bias="0.40"
         />
     <Button
         android:id="@+id/nextDay"
@@ -190,44 +211,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:background="@drawable/ic_right_arrow"
-        app:layout_constraintVertical_bias="0.65"
-        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintVertical_bias="0.80"
+        app:layout_constraintHorizontal_bias="0.60"
         />
 
-    <EditText
-        android:id="@+id/newWeather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_horizontal"
-        android:hint="Search city ...."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
-
-    <Button
-        android:id="@+id/newWeatherButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
 </android.support.constraint.ConstraintLayout>

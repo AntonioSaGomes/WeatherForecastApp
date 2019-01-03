@@ -33,17 +33,19 @@ public class WeatherFragment extends Fragment {
     @BindView(R.id.weatherCityName) TextView CityName;
     @BindView(R.id.weatherMaxTemp) TextView MaxTemp;
     @BindView(R.id.weatherMinTemp) TextView MinTemp;
-    @BindView(R.id.newWeather) EditText newWeather;
-    @BindView(R.id.newWeatherButton) Button newWeatherButton;
+    @BindView(R.id.previousDay) Button previousDayButton;
+    @BindView(R.id.nextDay) Button nextDayButton;
     @BindView(R.id.weatherImage) ImageView weatherImage;
     @BindView(R.id.weatherDescription) TextView weatherDescription;
+    @BindView(R.id.weatherDay) TextView weatherDay;
+
+    private int day=0;
     public String city_name = "Lisbon";
     public WeatherFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.weather_fragment, container, false);
-        Log.d("onCreateFrag:",city_name);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -51,15 +53,30 @@ public class WeatherFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        newWeatherButton.setOnClickListener(new View.OnClickListener() {
+        previousDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                city_name = newWeather.getText().toString();
-                Log.d("Here_onClick:",city_name);
+                try {
+                    day--;
+                }
+                catch (IndexOutOfBoundsException e){
+                    day=0;
+                }
                 configureViewModel();
             }
         });
-        Log.d("onActivityFrag:",city_name);
+        nextDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    day++;
+                }
+                catch (IndexOutOfBoundsException e){
+                    day=0;
+                }
+                configureViewModel();
+            }
+        });
         this.configureDagger();
         this.configureViewModel();
 
@@ -76,7 +93,7 @@ public class WeatherFragment extends Fragment {
     private void configureViewModel(){
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(WeatherViewModel.class);
         viewModel.init(city_name);
-        Log.d("configViewModel:",city_name);
+      //  Log.d("configViewModel:",city_name);
         viewModel.getWeather().observe(this, weather -> updateUI(weather));
     }
 
@@ -86,12 +103,12 @@ public class WeatherFragment extends Fragment {
 
     private void updateUI(@Nullable Weather weather){
         if (weather != null){
-            Log.d("WeatherFrag:",String.valueOf(weather.getCity_name()));
-            this.CityName.setText(weather.getCity_name());
-            this.MaxTemp.setText(String.valueOf(weather.getMain().getTemp_max()-272.15) + "ºC");
-            this.MinTemp.setText(String.valueOf(weather.getMain().getTemp_min()-272.15) + "ºC");
-            this.weatherDescription.setText(weather.getTempo().get(0).getMain());
-            this.weatherImage.setBackgroundResource(setDrawable(weather.getTempo().get(0).getMain()));
+            this.CityName.setText(weather.getCity().getName());
+            this.MaxTemp.setText(String.format("%.2f",weather.getWeatherList().get(day).getTemp().getDay_max_temp()-272.15) + "ºC");
+            this.MinTemp.setText(String.format("%.2f",weather.getWeatherList().get(day).getTemp().getDay_min_temp()-272.15) + "ºC");
+            this.weatherDescription.setText(weather.getWeatherList().get(day).getTempo().get(0).getMain());
+            this.weatherImage.setBackgroundResource(setDrawable(weather.getWeatherList().get(day).getTempo().get(0).getMain()));
+            this.weatherDay.setText("Day " + String.valueOf(day) );
         }
     }
 
@@ -103,6 +120,8 @@ public class WeatherFragment extends Fragment {
                 return R.drawable.ic_sunny;
             case "Rain":
                 return R.drawable.ic_rainy;
+            case "Snow":
+                return R.drawable.ic_snow;
         }
         return R.drawable.ic_sunny;
     }

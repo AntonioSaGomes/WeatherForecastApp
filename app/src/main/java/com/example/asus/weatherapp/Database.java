@@ -3,7 +3,7 @@ package com.example.asus.weatherapp;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 
-@android.arch.persistence.room.Database(entities = {Weather.class}, version = 4, exportSchema = false)
+@android.arch.persistence.room.Database(entities = {Weather.class}, version = 5, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class Database extends RoomDatabase {
 

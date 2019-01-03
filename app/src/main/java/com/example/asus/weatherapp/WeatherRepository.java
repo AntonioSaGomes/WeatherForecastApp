@@ -35,16 +35,17 @@ public class WeatherRepository {
     public LiveData<Weather> getWeather(String city_name) {
         Log.d("RepoGetWeather:",city_name);
         refreshWeather(city_name);
-        return weatherDao.load(city_name);
+        return weatherDao.load();
     }
 
     private void refreshWeather(final String city_name) {
         executor.execute(() -> {
-            boolean weatherExists = (weatherDao.hasWeather(city_name, getMaxRefreshTime(new Date())) != null);
-            if (!weatherExists) {
-                webService.getWeather(city_name,"f20dae443685124d02f23f31769e14bf").enqueue(new Callback<Weather>() {
+          //  boolean weatherExists = (weatherDao.hasWeather(city_name, getMaxRefreshTime(new Date())) != null);
+          //  if (!weatherExists) {
+                webService.getWeather(524901,"b1b15e88fa797225412429c1c50c122a1").enqueue(new Callback<Weather>() {
                     @Override
                     public void onResponse(Call<Weather> call, Response<Weather> response) {
+                        Log.d("Got_it:",response.body().toString());
                         Toast.makeText(App.context, "Data refreshed from network !", Toast.LENGTH_LONG).show();
                         executor.execute(() -> {
                             Weather weather = response.body();
@@ -58,7 +59,6 @@ public class WeatherRepository {
                         Log.d("ErrorWeather:",t.getMessage());
                         }
                 });
-            }
         });
     }
 

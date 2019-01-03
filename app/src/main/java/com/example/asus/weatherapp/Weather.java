@@ -19,64 +19,16 @@ public class Weather {
     @Expose
     private int weather_id;
 
-    @SerializedName("name")
+    @SerializedName("list")
     @Expose
-    private String city_name;
+    @TypeConverters(WeatherListConverter.class)
+    private List<WeatherList> weatherList;
 
-    @SerializedName("weather")
+    @SerializedName("city")
     @Expose
-    @TypeConverters(TempoConverter.class)
-    private List<Tempo> tempo;
+    @TypeConverters(CidadeConverter.class)
+    private Cidade city;
 
-    @SerializedName("description")
-    @Expose
-    private String description;
-
-    @SerializedName("min_temp")
-    @Expose
-    private Double min_temp;
-
-    @SerializedName("max_temp")
-    @Expose
-    private Double max_temp;
-
-    @SerializedName("coord")
-    @Expose
-    @TypeConverters(CoordConverter.class)
-    private Coord coord;
-
-    @SerializedName("main")
-    @Expose
-    @TypeConverters(MainConverter.class)
-    private Main main;
-
-    public Weather(@NonNull int weather_id, String city_name, List<Tempo> tempo, String description, Double min_temp, Double max_temp, Coord coord, Main main, Date lastRefresh) {
-        this.weather_id = weather_id;
-        this.city_name = city_name;
-        this.tempo = tempo;
-        this.description = description;
-        this.min_temp = min_temp;
-        this.max_temp = max_temp;
-        this.coord = coord;
-        this.main = main;
-        this.lastRefresh = lastRefresh;
-    }
-
-    public List<Tempo> getTempo() {
-        return tempo;
-    }
-
-    public void setTempo(List<Tempo> tempo) {
-        this.tempo = tempo;
-    }
-
-    public Coord getCoord() {
-        return coord;
-    }
-
-    public void setCoord(Coord coord) {
-        this.coord = coord;
-    }
 
     private Date lastRefresh;
 
@@ -89,44 +41,27 @@ public class Weather {
         this.weather_id = weather_id;
     }
 
-    public Main getMain() {
-        return main;
+    public Weather(@NonNull int weather_id, List<WeatherList> weatherList, Cidade city, Date lastRefresh) {
+        this.weather_id = weather_id;
+        this.weatherList = weatherList;
+        this.city = city;
+        this.lastRefresh = lastRefresh;
     }
 
-    public void setMain(Main main) {
-        this.main = main;
+    public List<WeatherList> getWeatherList() {
+        return weatherList;
     }
 
-    public String getCity_name() {
-        return city_name;
+    public void setWeatherList(List<WeatherList> weatherList) {
+        this.weatherList = weatherList;
     }
 
-    public void setCity_name(String city_name) {
-        this.city_name = city_name;
+    public Cidade getCity() {
+        return city;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getMin_temp() {
-        return min_temp;
-    }
-
-    public void setMin_temp(Double min_temp) {
-        this.min_temp = min_temp;
-    }
-
-    public Double getMax_temp() {
-        return max_temp;
-    }
-
-    public void setMax_temp(Double max_temp) {
-        this.max_temp = max_temp;
+    public void setCity(Cidade city) {
+        this.city = city;
     }
 
     public Date getLastRefresh() {
