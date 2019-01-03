@@ -56,24 +56,16 @@ public class WeatherFragment extends Fragment {
         previousDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
+                if (day != 0)
                     day--;
-                }
-                catch (IndexOutOfBoundsException e){
-                    day=0;
-                }
                 configureViewModel();
             }
         });
         nextDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
+                if (day != 6)
                     day++;
-                }
-                catch (IndexOutOfBoundsException e){
-                    day=0;
-                }
                 configureViewModel();
             }
         });
@@ -104,8 +96,8 @@ public class WeatherFragment extends Fragment {
     private void updateUI(@Nullable Weather weather){
         if (weather != null){
             this.CityName.setText(weather.getCity().getName());
-            this.MaxTemp.setText(String.format("%.2f",weather.getWeatherList().get(day).getTemp().getDay_max_temp()-272.15) + "ºC");
-            this.MinTemp.setText(String.format("%.2f",weather.getWeatherList().get(day).getTemp().getDay_min_temp()-272.15) + "ºC");
+            this.MaxTemp.setText(String.valueOf(Math.round(weather.getWeatherList().get(day).getTemp().getDay_max_temp()-272.15)) + "ºC");
+            this.MinTemp.setText(String.valueOf(Math.round(weather.getWeatherList().get(day).getTemp().getDay_min_temp()-272.15)) + "ºC");
             this.weatherDescription.setText(weather.getWeatherList().get(day).getTempo().get(0).getMain());
             this.weatherImage.setBackgroundResource(setDrawable(weather.getWeatherList().get(day).getTempo().get(0).getMain()));
             this.weatherDay.setText("Day " + String.valueOf(day) );
