@@ -85,7 +85,6 @@ public class WeatherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 city_name = newWeather.getText().toString();
-                Log.d("Here_onClick:",city_name);
                 configureViewModel();
             }
         });
@@ -120,9 +119,11 @@ public class WeatherFragment extends Fragment {
             this.weatherDescription.setText(weather.getWeatherList().get(day).getTempo().get(0).getMain());
             this.weatherImage.setBackgroundResource(setDrawable(weather.getWeatherList().get(day).getTempo().get(0).getMain()));
             date = DateConverter.toDate(weather.getWeatherList().get(day).getDate()*1000);
-            Log.d("dia:",date.toString());
             String month = new DateFormatSymbols().getMonths()[new DateTime(date).getMonthOfYear()-1];
             this.weatherDay.setText(new DateTime(date).getDayOfMonth() + " " + month);
+        }
+        else{
+            Toast.makeText(getContext(),"Couldn't find the city specified",Toast.LENGTH_SHORT);
         }
     }
 

@@ -45,12 +45,13 @@ public class WeatherRepository {
                 webService.getWeather(city_name, "f20dae443685124d02f23f31769e14bf").enqueue(new Callback<Weather>() {
                     @Override
                     public void onResponse(Call<Weather> call, Response<Weather> response) {
-                        Log.d("Got_it:", response.body().toString());
                         Toast.makeText(App.context, "Data refreshed from network !", Toast.LENGTH_LONG).show();
                         executor.execute(() -> {
                             Weather weather = response.body();
-                            weather.setLastRefresh(new Date());
-                            weatherDao.save(weather);
+                            if ( weather !=null) {
+                                weather.setLastRefresh(new Date());
+                                weatherDao.save(weather);
+                            }
                         });
                     }
 
