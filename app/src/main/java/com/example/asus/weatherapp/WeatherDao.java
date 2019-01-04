@@ -14,11 +14,13 @@ public interface WeatherDao {
     @Insert()
     void save(Weather weather);
 
-    @Query("Select * from weather")
-    LiveData<Weather> load();
+    @Query("SELECT * FROM weather WHERE city_name like :name")
+    LiveData<Weather> load(String name);
 
     @Query("Delete from weather where weather_id= :weather_id")
     void delete(int weather_id);
 
+    @Query("SELECT * FROM weather WHERE city_name = :city_name AND lastRefresh > :lastRefreshMax LIMIT 1")
+    Weather hasWeather(String city_name, Date lastRefreshMax);
 
 }

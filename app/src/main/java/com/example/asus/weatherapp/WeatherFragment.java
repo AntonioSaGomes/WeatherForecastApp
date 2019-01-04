@@ -17,11 +17,20 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import org.joda.time.DateTime;
+
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
+
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.MONTH;
 
 public class WeatherFragment extends Fragment {
 
@@ -38,7 +47,10 @@ public class WeatherFragment extends Fragment {
     @BindView(R.id.weatherImage) ImageView weatherImage;
     @BindView(R.id.weatherDescription) TextView weatherDescription;
     @BindView(R.id.weatherDay) TextView weatherDay;
+    @BindView(R.id.newWeather) EditText newWeather;
+    @BindView(R.id.newWeatherButton) Button newWeatherButton;
 
+    Date date;
     private int day=0;
     public String city_name = "Lisbon";
     public WeatherFragment() { }
@@ -56,16 +68,24 @@ public class WeatherFragment extends Fragment {
         previousDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (day != 0)
-                    day--;
+                if (!(day - 8 < 0))
+                    day-=8;
                 configureViewModel();
             }
         });
         nextDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (day != 6)
-                    day++;
+                if (!(day + 8> 39))
+                    day+=8;
+                configureViewModel();
+            }
+        });
+        newWeatherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                city_name = newWeather.getText().toString();
+                Log.d("Here_onClick:",city_name);
                 configureViewModel();
             }
         });
@@ -85,7 +105,6 @@ public class WeatherFragment extends Fragment {
     private void configureViewModel(){
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(WeatherViewModel.class);
         viewModel.init(city_name);
-      //  Log.d("configViewModel:",city_name);
         viewModel.getWeather().observe(this, weather -> updateUI(weather));
     }
 
@@ -100,7 +119,10 @@ public class WeatherFragment extends Fragment {
             this.MinTemp.setText(String.valueOf(Math.round(weather.getWeatherList().get(day).getTemp().getDay_min_temp()-272.15)) + "ºC");
             this.weatherDescription.setText(weather.getWeatherList().get(day).getTempo().get(0).getMain());
             this.weatherImage.setBackgroundResource(setDrawable(weather.getWeatherList().get(day).getTempo().get(0).getMain()));
-            this.weatherDay.setText("Day " + String.valueOf(day) );
+            date = DateConverter.toDate(weather.getWeatherList().get(day).getDate()*1000);
+            Log.d("dia:",date.toString());
+            String month = new DateFormatSymbols().getMonths()[new DateTime(date).getMonthOfYear()-1];
+            this.weatherDay.setText(new DateTime(date).getDayOfMonth() + " " + month);
         }
     }
 

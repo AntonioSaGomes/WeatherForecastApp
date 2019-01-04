@@ -7,15 +7,15 @@ class Temp {
 
     //"day":262.65,"min":261.41,"max":262.65,"night":261.41,"eve":262.65,"morn":262.65
 
-    @SerializedName("day")
+    @SerializedName("temp")
     @Expose
     private Double day_temp;
 
-    @SerializedName("min")
+    @SerializedName("temp_min")
     @Expose
     private Double day_min_temp;
 
-    @SerializedName("max")
+    @SerializedName("temp_max")
     @Expose
     private Double day_max_temp;
 

@@ -1,5 +1,6 @@
 package com.example.asus.weatherapp;
 
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
@@ -26,8 +27,10 @@ public class Weather {
 
     @SerializedName("city")
     @Expose
+    @Embedded(prefix = "city_")
     @TypeConverters(CidadeConverter.class)
     private Cidade city;
+
 
 
     private Date lastRefresh;
@@ -41,12 +44,15 @@ public class Weather {
         this.weather_id = weather_id;
     }
 
+
     public Weather(@NonNull int weather_id, List<WeatherList> weatherList, Cidade city, Date lastRefresh) {
         this.weather_id = weather_id;
         this.weatherList = weatherList;
         this.city = city;
         this.lastRefresh = lastRefresh;
     }
+
+
 
     public List<WeatherList> getWeatherList() {
         return weatherList;

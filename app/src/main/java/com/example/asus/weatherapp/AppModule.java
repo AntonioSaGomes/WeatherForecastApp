@@ -50,7 +50,7 @@ public class AppModule {
 
     // --- NETWORK INJECTION ---
 
-    private static String BASE_URL = "https://samples.openweathermap.org/data/2.5/forecast/";
+    private static String BASE_URL = "http://api.openweathermap.org/data/2.5/";
 
     @Provides
     Gson provideGson() { return new GsonBuilder().create(); }
