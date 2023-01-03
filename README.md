@@ -1,32 +1,15 @@
 # WeatherForecastApp
 
-Utiliza a Api openweathermap 5 day/3 hour forecast 
-Atualiza a informação relativa a cada cidade atraves da api de 3 em 3 minutos 
-e guarda na base de dados. Se nao for necessário atualizar então acede diretamente 
-à base de dados.
+"Uses the openweathermap 5 day/3 hour forecast API. Updates information for each city through the API every 3 minutes and stores it in the database. If it is not necessary to update, it directly accesses the database.
 
+## Architecture
 
-Arquitetura
+The architecture was based on the example provided in the statement. There is only one entity that stores objects or lists of JSON. Converters are used for each type of object/class in order to store in the database. The information collected from the JSON for the database is only the essential (city name, minimum/maximum temperature, description...) that is displayed in the UI.
 
-A arquitetura teve como base o exemplo providenciado no enunciado.
-Existe apenas uma Entidade que guarda objectos ou listas do Json. Para tal sao utilizados
-Converters para cada tipo de objecto/classe de forma a guardar na base de dados.
-A informação recolhida do Json para a base de dados é apenas a essencial(nome da Cidade,
-temperatura minima/maxima, descrição ...) que está exposta na UI.
+## Functionality
 
+The application allows you to search for cities and get the weather information for each of them over a period of 5 days.
 
-Funcionalidade
+## Limitations
 
-A aplicação permite pesquisar por Cidades e obter a informação meteorologia de cada uma delas 
-no espaço de 5 dias.
-
-
-Limitações
-
-O ideal era ter acesso a Api openweathermap 16 day/daily forecast(paga) pois os dados da temperatura
-são relativos ao dia. O JSON é mais compacto e nao sobrecarga a base de dados. Assim na base de dados 
-encontra-se todos os registos de 3 em 3 horas de cada dia e apenas um desses é mostrado na UI 
-não refletindo propriamente os dados relativos ao dia inteiro.
-
-
-
+Ideally, it would have access to the openweathermap 16 day/daily forecast (paid) API because the temperature data is related to the day. The JSON is more compact and does not overload the database. Thus, in the database, there are all records every 3 hours of each day and only one of these is displayed in the UI, not properly reflecting the data for the entire day."
